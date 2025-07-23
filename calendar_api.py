@@ -1,10 +1,12 @@
 """Google Calendar API integration for booking and availability management."""
+from __future__ import annotations
+
 # pylint: disable=no-member
-from datetime import datetime, timedelta
+
+from datetime import datetime, timedelta, time as dtime
 
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
-
 
 SERVICE_ACCOUNT_FILE = 'credentials_calendar.json'
 SCOPES = ['https://www.googleapis.com/auth/calendar']
@@ -68,7 +70,7 @@ def get_free_slots(date: str) -> list:
     return [slot for slot in SLOTS if slot not in taken_times]
 
 
-def book_slot(date: str, time: str, name: str, service_name: str) -> bool:
+def book_slot(date: str, time: str, name: str, service_name: str, username: str = "", phone: str = "") -> bool:
     """
     Books a calendar slot (30 minutes) if it's available.
     Returns True if successful, False if the slot is taken or it's a holiday.
@@ -82,8 +84,18 @@ def book_slot(date: str, time: str, name: str, service_name: str) -> bool:
     start_dt = datetime.fromisoformat(f"{date}T{time}")
     end_dt = start_dt + timedelta(minutes=60)
 
+    description_lines = []
+
+    if username:
+        description_lines.append(f"Telegram: https://t.me/{username}")
+    if phone:
+        description_lines.append(f"Телефон: {phone}")
+
+    description = "\n".join(description_lines) if description_lines else None
+
     event = {
         "summary": f"{name} — {service_name}",
+        "description": description,
         "start": {
             "dateTime": start_dt.isoformat(),
             "timeZone": "Europe/Lisbon"  # change to your time zone if needed
@@ -145,3 +157,27 @@ def unset_holiday(date: str) -> bool:
             return True
     print(f"No holiday found on {date}")
     return False
+
+
+from datetime import datetime, timedelta
+
+def find_nearest_slots(days_ahead=30, min_hours_ahead=1.5, max_results=5):
+    """
+    Returns up to `max_results` available slots starting from now + `min_hours_ahead`,
+    searching up to `days_ahead` into the future.
+    """
+    now = datetime.now() + timedelta(hours=min_hours_ahead)
+    results = []
+
+    for i in range(days_ahead):
+        date = (now + timedelta(days=i)).date().isoformat()
+        free_slots = get_free_slots(date)
+        for slot in free_slots:
+            slot_dt = datetime.fromisoformat(f"{date}T{slot}")
+            if slot_dt > now:
+                results.append((date, slot))
+                if len(results) >= max_results:
+                    return results
+
+    return results
+

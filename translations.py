@@ -19,6 +19,19 @@ TRANSLATIONS = {
         "booking_fail": "❌ Failed to book. Slot may be taken or it's a holiday.",
         "cancelled": "❌ Booking cancelled.",
         "select_service": "Please select a service:",
+        "slots_prompt": "How would you like to find an appointment?",
+        "nearest_slots": "Nearest available",
+        "choose_slot": "Choose by date",
+        "nearest_slot_found": "The nearest available slot is {date} at {time}.",
+        "no_slots_found": "No available slots in the next 30 days.",
+        "confirm_slot": "Confirm booking on {date} at {time}?",
+        "booking_confirmed": "✅ Booking confirmed for {date} at {time}.",
+        "booking_cancelled": "❌ Booking cancelled.",
+        "slot_taken": "⚠️ {date} at {time} is already taken. Please choose another.",
+        "no_pending_booking": "No pending booking found.",
+        "confirm_button": "✅ Yes",
+        "cancel_button": "❌ Cancel",
+
     },
     "ru": {
         "welcome": (
@@ -40,6 +53,19 @@ TRANSLATIONS = {
         "booking_fail": "❌ Не удалось записаться. Возможно, время занято или выходной.",
         "cancelled": "❌ Запись отменена.",
         "select_service": "Выберите услугу:",
+        "slots_prompt": "Как вы хотите записаться?",
+        "nearest_slots": "Ближайшее время",
+        "choose_slot": "Выбрать дату",
+        "nearest_slot_found": "Ближайшая доступная запись: {date} в {time}.",
+        "no_slots_found": "Нет свободных слотов в ближайшие 30 дней.",
+        "confirm_slot": "Подтвердить запись на {date} в {time}?",
+        "booking_confirmed": "✅ Запись подтверждена: {date} в {time}.",
+        "booking_cancelled": "❌ Запись отменена.",
+        "slot_taken": "⚠️ {date} в {time} уже занято. Выберите другое время.",
+        "no_pending_booking": "Нет активной записи для подтверждения.",
+        "confirm_button": "✅ Подтвердить",
+        "cancel_button": "❌ Отмена",
+
     },
     "pt": {
         "welcome": (
@@ -61,5 +87,15 @@ TRANSLATIONS = {
         "booking_fail": "❌ Não foi possível marcar. O horário pode estar ocupado ou é um feriado.",
         "cancelled": "❌ Marcação cancelada.",
         "select_service": "Escolha um serviço:",
+        "slots_prompt": "Como você gostaria de agendar?",
+        "nearest_slots": "Horários mais próximos",
+        "choose_slot": "Escolher data",
+        "confirm_slot": "Confirmar horário para {date} às {time}?",
+        "booking_confirmed": "✅ Horário confirmado: {date} às {time}.",
+        "booking_cancelled": "❌ Horário cancelado.",
+        "slot_taken": "⚠️ {date} às {time} já está ocupado. Escolha outro horário.",
+        "no_pending_booking": "Nenhum horário pendente para confirmar.",
+        "confirm_button": "✅ Confirmar",
+        "cancel_button": "❌ Cancelar",
     }
 }

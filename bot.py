@@ -32,6 +32,12 @@ def handle_start(message):
     name = f"{user.first_name or ''} {user.last_name or ''}".strip()
     bot.send_message(chat_id, get_phrase(chat_id, "welcome", name=name))
 
+    bot.send_message(
+        chat_id,
+        get_phrase(chat_id, "confirm_save_profile"),
+        reply_markup=confirm_keyboard(chat_id)
+    )
+
 
 @bot.message_handler(commands=['language'])
 def handle_language(message):
